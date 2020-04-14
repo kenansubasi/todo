@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    ports:
+      - 5432:5432
+    env_file:
+      - ./todo.env
+
+  redis:
+    ports:
+      - 6379:6379
+
+  worker:
+    command: celery worker -l info -A todo
+
+  backend:
+    command: python manage.py runserver 0:8000
+    ports:
+      - 8000:8000

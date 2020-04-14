@@ -1,0 +1,24 @@
+{
+    "SERVER_TYPE": "development",
+    "DEBUG": true,
+    "ALLOWED_HOSTS": [
+        "*"
+    ],
+    "CELERY_BROKER_URL": "redis://redis:6379",
+    "CELERY_RESULT_BACKEND": "redis://redis:6379",
+    "DATABASES": {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "todo",
+            "HOST": "db",
+            "USER": "todo",
+            "PASSWORD": "secret",
+            "PORT": 5432
+        }
+    },
+    "MEDIA_ROOT": "/code/tmp/media/",
+    "MEDIA_URL": "/media/",
+    "SECRET_KEY": "+_3yv5p)%tq!g3zyhbc&b&9a=i94q8%qgat6!7a3c8o9g6vla1",
+    "STATIC_ROOT": "/code/tmp/static/",
+    "STATIC_URL": "/static/"
+}

@@ -1,0 +1,10 @@
+[run]
+source = ./todo
+omit =
+    */migrations/*
+    */settings.py
+    */tests.py
+    */urls*.py
+    todo/management/commands/initdb.py
+    todo/wsgi.py
+    manage.py

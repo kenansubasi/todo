@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: postgres
+
+  redis:
+    image: redis
+
+  worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    command: celery worker -l info -A todo
+    entrypoint: /code/docker/worker/entrypoint.sh
+    volumes:
+      - ..:/code
+    depends_on:
+      - redis
+
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    entrypoint: /code/docker/backend/entrypoint.sh
+    volumes:
+      - ..:/code
+    depends_on:
+      - db
+      - worker
