@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from modules.users.models import User
+from todo.users.models import User
 
 
-admin.register(User, UserAdmin)
+admin.site.register(User, UserAdmin)

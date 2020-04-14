@@ -44,6 +44,18 @@ To status docker containers:
 docker-compose -p todo -f docker/docker-compose.yml -f docker/docker-compose.dev.yml ps
 ```
 
+To load init data:
+```
+docker exec -i -t todo_backend_1 /bin/bash
+python manage.py initdb
+```
+
+To run tests:
+```
+docker exec -i -t todo_backend_1 /bin/bash
+coverage run manage.py test --noinput && coverage html --skip-covered
+```
+
 
 ## Technologies
 

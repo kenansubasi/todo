@@ -47,10 +47,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # External Applications
+    "rest_framework",
+    "rest_framework.authtoken",
 
     # Internal Applications
     "todo",
-    "modules.users",
+    "todo.core",
+    "todo.users"
 ]
 
 MIDDLEWARE = [
@@ -131,3 +134,11 @@ FIXTURE_YAML_DIR = os.path.join(BASE_DIR, "fixtures", "yaml")
 FIXTURE_DIRS = (
     FIXTURE_DIR,
 )
+
+
+# Rest Framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100
+}
