@@ -1,0 +1,32 @@
+# User
+- model: auth.User
+  pk: 1
+  fields:
+    date_joined: "2020-03-29 00:00:00.000000+00:00"
+    email: "admin@todo.com"
+    first_name: "Admin"
+    groups: []
+    is_active: true
+    is_staff: true
+    is_superuser: true
+    last_login: "2020-04-14 00:00:00.000000+00:00"
+    last_name: "Todo"
+    password: "pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U="  # password: secret
+    user_permissions: []
+    username: "admin"
+
+- model: auth.User
+  pk: 2
+  fields:
+    date_joined: "2020-03-29 00:00:00.000000+00:00"
+    email: "kenan.subasi@todo.com"
+    first_name: "Kenan"
+    groups: []
+    is_active: true
+    is_staff: true
+    is_superuser: true
+    last_login: "2020-04-14 01:00:00.000000+00:00"
+    last_name: "Subaşı"
+    password: "pbkdf2_sha256$20000$aBDrHukDm8oe$G6XO5hT+mmkZQWSYqU8n7LC2XFjwbVXY3EWrPURZr3U="  # password: secret
+    user_permissions: []
+    username: "kenan.subasi"

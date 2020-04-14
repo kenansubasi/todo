@@ -116,3 +116,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Fixtures
+
+FIXTURE_DIR = os.path.join(BASE_DIR, "fixtures")
+FIXTURE_YAML_DIR = os.path.join(BASE_DIR, "fixtures", "yaml")
+FIXTURE_DIRS = (
+    FIXTURE_DIR,
+)
