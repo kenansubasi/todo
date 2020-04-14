@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     # External Applications
 
     # Internal Applications
-    "todo"
+    "todo",
+    "modules.users",
 ]
 
 MIDDLEWARE = [
@@ -83,6 +84,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "todo.wsgi.application"
+
+
+# User
+
+AUTH_USER_MODEL = "users.User"
 
 
 # Password validation
