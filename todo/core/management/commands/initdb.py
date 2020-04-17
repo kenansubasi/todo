@@ -9,7 +9,8 @@ class Command(BaseCommand):
             return
 
         fixtures = [  # order is important!
-            "test_user",
+            "test_users",
+            "test_tasks"
         ]
         for fixture in fixtures:
             self.stdout.write(f"Inserting fixture '{fixture}'...")

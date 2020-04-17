@@ -1,0 +1,72 @@
+# Tasks
+- model: tasks.Task
+  pk: 1
+  fields:
+    created_at: "2020-04-17 01:00:00.000000+00:00"
+    is_completed: false
+    title: "Create new project (todo-app)"
+    updated_at: "2020-04-17 01:00:00.000000+00:00"
+    user: 1 # kenan.subasi
+
+- model: tasks.Task
+  pk: 2
+  fields:
+    created_at: "2020-04-17 02:00:00.000000+00:00"
+    is_completed: false
+    title: "Call the dentist"
+    updated_at: "2020-04-17 02:00:00.000000+00:00"
+    user: 1 # admin
+
+- model: tasks.Task
+  pk: 3
+  fields:
+    created_at: "2020-04-17 03:00:00.000000+00:00"
+    is_completed: false
+    title: "Schedule a dinner with Mom"
+    updated_at: "2020-04-17 03:00:00.000000+00:00"
+    user: 2 # kenan.subasi
+
+- model: tasks.Task
+  pk: 4
+  fields:
+    created_at: "2020-04-17 04:00:00.000000+00:00"
+    is_completed: false
+    title: "Pair programming /w John"
+    updated_at: "2020-04-17 04:00:00.000000+00:00"
+    user: 2 # kenan.subasi
+
+- model: tasks.Task
+  pk: 5
+  fields:
+    created_at: "2020-04-17 05:00:00.000000+00:00"
+    is_completed: true
+    title: "Water the plants"
+    updated_at: "2020-04-18 10:00:00.000000+00:00"
+    user: 1 # admin
+
+- model: tasks.Task
+  pk: 6
+  fields:
+    created_at: "2020-04-17 06:00:00.000000+00:00"
+    is_completed: false
+    title: "Meeting with Jennifer"
+    updated_at: "2020-04-17 06:00:00.000000+00:00"
+    user: 1 # admin
+
+- model: tasks.Task
+  pk: 7
+  fields:
+    created_at: "2020-04-17 07:00:00.000000+00:00"
+    is_completed: true
+    title: "Finalize project (todo-app)"
+    updated_at: "2020-04-19 22:00:00.000000+00:00"
+    user: 2 # kenan.subasi
+
+- model: tasks.Task
+  pk: 8
+  fields:
+    created_at: "2020-04-17 08:00:00.000000+00:00"
+    is_completed: false
+    title: "Review project (todo-app)"
+    updated_at: "2020-04-17 08:00:00.000000+00:00"
+    user: 1 # admin

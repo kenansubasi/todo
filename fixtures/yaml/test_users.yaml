@@ -1,4 +1,4 @@
-# User
+# Users
 - model: users.User
   pk: 1
   fields:

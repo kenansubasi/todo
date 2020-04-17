@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     # Internal Applications
     "todo",
     "todo.core",
-    "todo.users"
+    "todo.users",
+    "todo.tasks"
 ]
 
 MIDDLEWARE = [
