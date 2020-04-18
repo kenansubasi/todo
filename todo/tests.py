@@ -31,6 +31,7 @@ class TodoApiTestCase(TodoTestCase):
     API_URL = "/api/v1"
     USERS_PREFIX = "users"
     TASKS_PREFIX = "tasks"
+    TAGS_PREFIX = "tags"
 
     def setUp(self):
         self.client = APIClient()

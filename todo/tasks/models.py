@@ -21,3 +21,8 @@ class Task(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    def _get_tags_display(self):
+        return  u",".join(tag.name for tag in self.tags.all())
+    _get_tags_display.short_description = _("Tags")
+    get_tags_display = property(_get_tags_display)

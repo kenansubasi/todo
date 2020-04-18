@@ -6,10 +6,11 @@ from todo.users.serializers import UserRetrieveSerializer
 
 class TaskSerializer(serializers.ModelSerializer):
     user = UserRetrieveSerializer(read_only=True)
+    tags = serializers.CharField(source="get_tags_display")
 
     class Meta:
         model = Task
-        fields = ("id", "title", "is_completed", "user", "created_at", "updated_at")
+        fields = ("id", "title", "is_completed", "user", "tags", "created_at", "updated_at")
 
 
 class TaskListSerializer(TaskSerializer):
@@ -33,3 +34,7 @@ class TaskUpdateSerializer(TaskSerializer):
     class Meta:
         model = Task
         fields = ("id", "title", "is_completed")
+
+
+class TaskTagsSerializer(serializers.Serializer):
+    tags = serializers.CharField(allow_blank=True)

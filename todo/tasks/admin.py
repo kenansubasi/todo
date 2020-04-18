@@ -5,7 +5,7 @@ from todo.tasks.models import Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ("title", "user", "is_completed", "tag_list", "created_at", "updated_at")
+    list_display = ("title", "user", "is_completed", "get_tags_display", "created_at", "updated_at")
     list_filter = ("is_completed", "created_at", "updated_at")
 
     readonly_fields = ("user", "created_at", "updated_at")
@@ -20,6 +20,3 @@ class TaskAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.user = request.user
         super().save_model(request, obj, form, change)
-
-    def tag_list(self, obj):
-        return u", ".join(o.name for o in obj.tags.all())

@@ -6,7 +6,7 @@ from todo.tests import TodoApiTestCase
 
 
 class TaskApiTestCase(TodoApiTestCase):
-    fixtures = ("test_users", "test_tasks")
+    fixtures = ("test_users", "test_tags", "test_tasks")
 
     def test_task_list(self):
         url = f"{self.API_URL}/{self.TASKS_PREFIX}/"
@@ -53,6 +53,7 @@ class TaskApiTestCase(TodoApiTestCase):
         self.assertEqual(content.get("title"), "Go shopping")
         self.assertEqual(content.get("is_completed"), False)
         self.assertEqual(content.get("user", {}).get("username"), self.USER_USERNAME)
+        self.assertEqual(content.get("tags"), "")
         self.assertContains(response, "created_at")
         self.assertContains(response, "updated_at")
 
@@ -72,6 +73,7 @@ class TaskApiTestCase(TodoApiTestCase):
         self.assertEqual(content.get("title"), "Call the dentist")
         self.assertEqual(content.get("is_completed"), False)
         self.assertEqual(content.get("user", {}).get("username"), self.USER_USERNAME)
+        self.assertEqual(content.get("tags"), "health,doctor")
         self.assertEqual(content.get("created_at"), "2020-04-17T01:00:00Z")
         self.assertEqual(content.get("updated_at"), "2020-04-17T01:00:00Z")
 
@@ -159,6 +161,53 @@ class TaskApiTestCase(TodoApiTestCase):
         # Different user
         different_user_task_url = f"{self.API_URL}/{self.TASKS_PREFIX}/2/"
         response = self.client.patch(different_user_task_url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_task_tags(self):
+        url = f"{self.API_URL}/{self.TASKS_PREFIX}/{self.TASK_ID}/{self.TAGS_PREFIX}/"
+        data = {
+            "tags": "health"
+        }
+
+        # Unauthorized user
+        response = self.client.post(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        # Authorized user
+        self.api_authentication()
+        response = self.client.post(url, data=data)
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(content.get("tags"), "health")
+
+        # Double check
+        retrieve_url = f"{self.API_URL}/{self.TASKS_PREFIX}/{self.TASK_ID}/"
+        response = self.client.get(retrieve_url)
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(content.get("id"), self.TASK_ID)
+        self.assertEqual(content.get("tags"), "health")
+
+        # Clear tags
+        data = {
+            "tags": ""
+        }
+        response = self.client.post(url, data=data)
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(content.get("tags"), "")
+
+        # Double check
+        retrieve_url = f"{self.API_URL}/{self.TASKS_PREFIX}/{self.TASK_ID}/"
+        response = self.client.get(retrieve_url)
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(content.get("id"), self.TASK_ID)
+        self.assertEqual(content.get("tags"), "")
+
+        # Different user
+        different_user_task_url = f"{self.API_URL}/{self.TASKS_PREFIX}/2/{self.TAGS_PREFIX}/"
+        response = self.client.post(different_user_task_url, data=data)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_task_destroy(self):

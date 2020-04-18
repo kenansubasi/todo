@@ -394,6 +394,47 @@
 			"response": []
 		},
 		{
+			"name": "Task Tags",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{AUTH_TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"tags\": \"health,doctor\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/tags/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"{{VERSION}}",
+						"tasks",
+						"{{TASK_ID}}",
+						"tags",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Task Delete",
 			"request": {
 				"method": "DELETE",

@@ -1,10 +1,13 @@
+from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from todo.tasks.models import Task
 from todo.tasks.serializers import (
-    TaskSerializer, TaskListSerializer, TaskCreateSerializer, TaskRetrieveSerializer, TaskUpdateSerializer
+    TaskSerializer, TaskListSerializer, TaskCreateSerializer, TaskRetrieveSerializer, TaskUpdateSerializer,
+    TaskTagsSerializer
 )
 
 
@@ -42,3 +45,26 @@ class TaskDetailView(RetrieveUpdateDestroyAPIView):
             return TaskUpdateSerializer
         else:
             return TaskSerializer
+
+
+class TaskTagsSetView(GenericAPIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    lookup_url_kwarg = "task_id"
+
+    def get_queryset(self):
+        return Task.objects.select_related("user").filter(user=self.request.user).order_by("-id")
+
+    def post(self, request, *args, **kwargs):
+        serializer = TaskTagsSerializer(data=request.data)
+
+        if serializer.is_valid():
+            instance = self.get_object()
+            tag_list = serializer.validated_data.get("tags", "")
+            if tag_list:
+                instance.tags.set(*tag_list.split(","))
+            else:
+                instance.tags.clear()
+            return Response(request.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
