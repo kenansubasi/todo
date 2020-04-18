@@ -6,7 +6,7 @@ from todo.tests import TodoApiTestCase
 
 
 class UserApiTestCase(TodoApiTestCase):
-    fixtures = ("test_user",)
+    fixtures = ("test_users",)
 
     def test_user_login(self):
         url = f"{self.API_URL}/{self.USERS_PREFIX}/login/"

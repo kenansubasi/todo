@@ -6,7 +6,7 @@
     is_completed: false
     title: "Create new project (todo-app)"
     updated_at: "2020-04-17 01:00:00.000000+00:00"
-    user: 1 # kenan.subasi
+    user: 2 # kenan.subasi
 
 - model: tasks.Task
   pk: 2

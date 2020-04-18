@@ -55,9 +55,9 @@ class UserDetailView(RetrieveUpdateAPIView):
         return User.objects.filter(id=self.request.user.id)
 
     def get_serializer_class(self):
-        if self.request.method == "get":
+        if self.request.method.lower() == "get":
             return UserRetrieveSerializer
-        elif  self.request.method == "put":
+        elif  self.request.method.lower() == "put":
             return UserUpdateSerializer
         else:
             return UserSerializer
