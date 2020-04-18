@@ -10,6 +10,7 @@ class Command(BaseCommand):
 
         fixtures = [  # order is important!
             "test_users",
+            "test_tags",
             "test_tasks"
         ]
         for fixture in fixtures:

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # External Applications
     "rest_framework",
     "rest_framework.authtoken",
+    "taggit",
 
     # Internal Applications
     "todo",
@@ -143,3 +144,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100
 }
+
+
+# Django Taggit
+TAGGIT_CASE_INSENSITIVE = True

@@ -1,3 +1,5 @@
+from taggit.managers import TaggableManager
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +11,7 @@ class Task(models.Model):
     user = models.ForeignKey(
         verbose_name=_("User"), to=settings.AUTH_USER_MODEL, related_name="tasks", on_delete=models.CASCADE
     )
+    tags = TaggableManager(blank=True)
     created_at = models.DateTimeField(verbose_name=_("Created at"), auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(verbose_name=_("Updated at"), auto_now=True, editable=False)
 

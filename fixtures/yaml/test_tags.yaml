@@ -1,0 +1,122 @@
+# Tags
+- model: taggit.Tag
+  pk: 1
+  fields:
+    name: "health"
+    slug: "health"
+
+- model: taggit.Tag
+  pk: 2
+  fields:
+    name: "doctor"
+    slug: "doctor"
+
+- model: taggit.Tag
+  pk: 3
+  fields:
+    name: "work"
+    slug: "work"
+
+- model: taggit.Tag
+  pk: 4
+  fields:
+    name: "project"
+    slug: "project"
+
+- model: taggit.Tag
+  pk: 5
+  fields:
+    name: "friend"
+    slug: "friend"
+
+- model: taggit.Tag
+  pk: 6
+  fields:
+    name: "homework"
+    slug: "homework"
+
+
+# Tagged Items
+- model: taggit.TaggedItem
+  pk: 1
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 1  # Call the dentist
+    tag: 1  # health
+
+- model: taggit.TaggedItem
+  pk: 2
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 1  # Call the dentist
+    tag: 2  # doctor
+
+- model: taggit.TaggedItem
+  pk: 3
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 2  # Create new project (todo-app)
+    tag: 3  # work
+
+- model: taggit.TaggedItem
+  pk: 4
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 2  # Create new project (todo-app)
+    tag: 4  # project
+
+- model: taggit.TaggedItem
+  pk: 5
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 4  # Pair programming /w John
+    tag: 3  # work
+
+- model: taggit.TaggedItem
+  pk: 6
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 4  # Pair programming /w John
+    tag: 4  # project
+
+- model: taggit.TaggedItem
+  pk: 7
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 5  # Water the plants
+    tag: 6  # homework
+
+- model: taggit.TaggedItem
+  pk: 8
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 6  # Meeting with Jennifer
+    tag: 5  # friend
+
+- model: taggit.TaggedItem
+  pk: 9
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 7  # Finalize project (todo-app)
+    tag: 3  # work
+
+- model: taggit.TaggedItem
+  pk: 10
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 7  # Finalize project (todo-app)
+    tag: 4  # project
+
+- model: taggit.TaggedItem
+  pk: 11
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 8  # Review project (todo-app)
+    tag: 3  # work
+
+- model: taggit.TaggedItem
+  pk: 12
+  fields:
+    content_type: ["tasks", "task"]
+    object_id: 8  # Review project (todo-app)
+    tag: 4  # project

@@ -13,3 +13,4 @@ celery==4.3.0
 redis==3.4.1
 PyYAML==5.3.1
 djangorestframework==3.11.0
+django-taggit==1.2.0
