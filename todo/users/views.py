@@ -57,7 +57,7 @@ class UserDetailView(RetrieveUpdateAPIView):
     def get_serializer_class(self):
         if self.request.method.lower() == "get":
             return UserRetrieveSerializer
-        elif  self.request.method.lower() == "put":
+        elif  self.request.method.lower() in ["put", "patch"]:
             return UserUpdateSerializer
         else:
             return UserSerializer

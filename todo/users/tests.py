@@ -64,15 +64,21 @@ class UserApiTestCase(TodoApiTestCase):
             "username": "kenan.subasi",
             "email": "admin.todo@todo.com",
             "first_name": "Admin",
-            "last_name": "Todo"
         }
 
         # Unauthorized user
         response = self.client.put(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-        # Existing username
+        # Invalid data
         self.api_authentication()
+        response = self.client.put(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # Existing username
+        data.update({
+            "last_name": "Todo"
+        })
         response = self.client.put(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -92,4 +98,37 @@ class UserApiTestCase(TodoApiTestCase):
         # Different user
         different_user_url = f"{self.API_URL}/{self.USERS_PREFIX}/kenan.subasi/"
         response = self.client.put(different_user_url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_user_partial_update(self):
+        url = f"{self.API_URL}/{self.USERS_PREFIX}/{self.USER_USERNAME}/"
+        data = {
+            "username": "kenan.subasi"
+        }
+
+        # Unauthorized user
+        response = self.client.put(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        # Existing username
+        self.api_authentication()
+        response = self.client.put(url, data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # Authorized user
+        data.update({
+            "username": "admin.todo"
+        })
+        response = self.client.patch(url, data=data)
+        content = json.loads(response.content)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(content.get("id"), self.USER_ID)
+        self.assertEqual(content.get("username"), data["username"])
+        self.assertEqual(content.get("email"), "admin@todo.com")
+        self.assertEqual(content.get("first_name"), "Admin")
+        self.assertEqual(content.get("last_name"), "Todo")
+
+        # Different user
+        different_user_url = f"{self.API_URL}/{self.USERS_PREFIX}/kenan.subasi/"
+        response = self.client.patch(different_user_url, data=data)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

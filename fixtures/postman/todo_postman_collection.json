@@ -185,7 +185,62 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"admin.todo\",\n\t\"email\": \"admini@todo.com\",\n\t\"first_name\": \"Admin\",\n\t\"last_name\": \"Todo\"\n}"
+					"raw": "{\n\t\"username\": \"admin.todo\",\n\t\"email\": \"admin@todo.com\",\n\t\"first_name\": \"Admin\",\n\t\"last_name\": \"Todo\"\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"{{VERSION}}",
+						"users",
+						"{{USER_USERNAME}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Update (Partial)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89267913-8d54-4171-9bed-49181f47b986",
+						"exec": [
+							"if (pm.response.code == 200) {",
+							"    data = pm.response.json()",
+							"    pm.environment.set(\"USER_USERNAME\", data.username)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{AUTH_TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"admin@todo.com\"\n}"
 				},
 				"url": {
 					"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
