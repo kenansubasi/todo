@@ -16,9 +16,20 @@ class TaskListSerializer(TaskSerializer):
     pass
 
 
+class TaskRetrieveSerializer(TaskSerializer):
+    pass
+
+
 class TaskCreateSerializer(TaskSerializer):
 
     class Meta:
         model = Task
         fields = ("id", "title", "is_completed", "user", "created_at", "updated_at")
         read_only_fields = ("is_completed", "user", "created_at", "updated_at")
+
+
+class TaskUpdateSerializer(TaskSerializer):
+
+    class Meta:
+        model = Task
+        fields = ("id", "title", "is_completed")

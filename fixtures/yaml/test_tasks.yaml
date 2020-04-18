@@ -4,18 +4,18 @@
   fields:
     created_at: "2020-04-17 01:00:00.000000+00:00"
     is_completed: false
-    title: "Create new project (todo-app)"
+    title: "Call the dentist"
     updated_at: "2020-04-17 01:00:00.000000+00:00"
-    user: 2 # kenan.subasi
+    user: 1 # admin
 
 - model: tasks.Task
   pk: 2
   fields:
     created_at: "2020-04-17 02:00:00.000000+00:00"
     is_completed: false
-    title: "Call the dentist"
+    title: "Create new project (todo-app)"
     updated_at: "2020-04-17 02:00:00.000000+00:00"
-    user: 1 # admin
+    user: 2 # kenan.subasi
 
 - model: tasks.Task
   pk: 3

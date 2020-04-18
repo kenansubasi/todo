@@ -11,6 +11,7 @@ class TodoTestCase(TestCase):
     USER_ID = 1
     USER_USERNAME = "admin"
     USER_PASSWORD = "secret"  # common password for each user.
+    TASK_ID = 1
 
     @classmethod
     def setUpClass(cls):

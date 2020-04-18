@@ -276,6 +276,158 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Task Retrieve",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{AUTH_TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"{{VERSION}}",
+						"tasks",
+						"{{TASK_ID}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Task Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{AUTH_TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Call the dentist\",\n\t\"is_completed\": true\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"{{VERSION}}",
+						"tasks",
+						"{{TASK_ID}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Task Update (Partial)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{AUTH_TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"is_completed\": true\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"{{VERSION}}",
+						"tasks",
+						"{{TASK_ID}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Task Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{AUTH_TOKEN}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"{{VERSION}}",
+						"tasks",
+						"{{TASK_ID}}",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
