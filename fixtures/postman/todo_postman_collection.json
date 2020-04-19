@@ -6,524 +6,618 @@
 	},
 	"item": [
 		{
-			"name": "User Login",
-			"event": [
+			"name": "User",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "b97d303a-35c6-4493-8afc-535e07b4b3b0",
-						"exec": [
-							"if (pm.response.code == 200) {",
-							"    data = pm.response.json()",
-							"    pm.environment.set(\"AUTH_TOKEN\", data.auth_token)",
-							"}"
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b97d303a-35c6-4493-8afc-535e07b4b3b0",
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    data = pm.response.json()",
+									"    pm.environment.set(\"AUTH_TOKEN\", data.auth_token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"{{USER_USERNAME}}\",\n\t\"password\": \"{{USER_PASSWORD}}\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/users/login/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"users",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "95ee105b-8d5b-4ae6-a564-06acb8216f4e",
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    pm.environment.unset(\"AUTH_TOKEN\")",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/users/logout/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"users",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"users",
+								"{{USER_USERNAME}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "89267913-8d54-4171-9bed-49181f47b986",
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    data = pm.response.json()",
+									"    pm.environment.set(\"USER_USERNAME\", data.username)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin.todo\",\n\t\"email\": \"admin@todo.com\",\n\t\"first_name\": \"Admin\",\n\t\"last_name\": \"Todo\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"users",
+								"{{USER_USERNAME}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Update (Partial)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "89267913-8d54-4171-9bed-49181f47b986",
+								"exec": [
+									"if (pm.response.code == 200) {",
+									"    data = pm.response.json()",
+									"    pm.environment.set(\"USER_USERNAME\", data.username)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"admin@todo.com\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"users",
+								"{{USER_USERNAME}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Update (Partial)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"is_completed\": true\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								"{{TASK_ID}}",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\": \"{{USER_USERNAME}}\",\n\t\"password\": \"{{USER_PASSWORD}}\"\n}"
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/users/login/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"users",
-						"login",
-						""
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "User Logout",
-			"event": [
+			"name": "Task",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "95ee105b-8d5b-4ae6-a564-06acb8216f4e",
-						"exec": [
-							"if (pm.response.code == 200) {",
-							"    pm.environment.unset(\"AUTH_TOKEN\")",
-							"}"
+					"name": "Task List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task List (Filter)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/?is_completed=true",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								""
+							],
+							"query": [
+								{
+									"key": "is_completed",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task List (Search)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/?search=project",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "project"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Go shopping\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								"{{TASK_ID}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Call the dentist\",\n\t\"is_completed\": true\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								"{{TASK_ID}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Tags",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"tags\": \"health,doctor\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/tags/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								"{{TASK_ID}}",
+								"tags",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{AUTH_TOKEN}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"{{VERSION}}",
+								"tasks",
+								"{{TASK_ID}}",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/users/logout/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"users",
-						"logout",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Retrieve",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"users",
-						"{{USER_USERNAME}}",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Update",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "89267913-8d54-4171-9bed-49181f47b986",
-						"exec": [
-							"if (pm.response.code == 200) {",
-							"    data = pm.response.json()",
-							"    pm.environment.set(\"USER_USERNAME\", data.username)",
-							"}"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\": \"admin.todo\",\n\t\"email\": \"admin@todo.com\",\n\t\"first_name\": \"Admin\",\n\t\"last_name\": \"Todo\"\n}"
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"users",
-						"{{USER_USERNAME}}",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Update (Partial)",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "89267913-8d54-4171-9bed-49181f47b986",
-						"exec": [
-							"if (pm.response.code == 200) {",
-							"    data = pm.response.json()",
-							"    pm.environment.set(\"USER_USERNAME\", data.username)",
-							"}"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"email\": \"admin@todo.com\"\n}"
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/users/{{USER_USERNAME}}/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"users",
-						"{{USER_USERNAME}}",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Task List",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"tasks",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Task Create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Go shopping\"\n}"
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"tasks",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Task Retrieve",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"tasks",
-						"{{TASK_ID}}",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Task Update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Call the dentist\",\n\t\"is_completed\": true\n}"
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"tasks",
-						"{{TASK_ID}}",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Task Update (Partial)",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"is_completed\": true\n}"
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"tasks",
-						"{{TASK_ID}}",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Task Tags",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"tags\": \"health,doctor\"\n}"
-				},
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/tags/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"tasks",
-						"{{TASK_ID}}",
-						"tags",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Task Delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Token {{AUTH_TOKEN}}"
-					},
-					{
-						"key": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Accept",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "{{BASE_URL}}/api/{{VERSION}}/tasks/{{TASK_ID}}/",
-					"host": [
-						"{{BASE_URL}}"
-					],
-					"path": [
-						"api",
-						"{{VERSION}}",
-						"tasks",
-						"{{TASK_ID}}",
-						""
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

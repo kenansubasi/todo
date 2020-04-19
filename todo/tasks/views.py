@@ -1,5 +1,7 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.filters import SearchFilter
 from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -14,6 +16,9 @@ from todo.tasks.serializers import (
 class TaskListView(ListCreateAPIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+    filter_backends = (DjangoFilterBackend, SearchFilter)
+    filterset_fields = ("is_completed",)
+    search_fields = ("title",)
 
     def get_queryset(self):
         return Task.objects.select_related("user").filter(user=self.request.user).order_by("-id")
